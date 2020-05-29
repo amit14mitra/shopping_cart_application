@@ -1,0 +1,22 @@
+p{
+    color:red;
+    font-size: xx-large;
+}
+
+input.ng-valid{
+    border-left:solid 7px green;
+}
+
+input.ng-invalid{
+    border-left:solid 7px red;
+}
+
+input.ng-dirty{
+    background-color: aqua;
+    color:indigo;
+}
+
+/*not yet modified*/
+input.ng-pristine{
+    background-color:peachpuff;
+}

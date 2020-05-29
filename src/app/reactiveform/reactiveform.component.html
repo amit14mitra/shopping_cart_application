@@ -1,0 +1,68 @@
+<h2>Reactive Form</h2>
+
+<form class="form-horizontal" [formGroup]="registerForm" (ngSubmit)="logForm(registerForm.value)">
+    <div class="container">
+        <div class="form-group">
+            <label>FirstName: 
+            </label>
+            <input type="text" class="form-control"
+            formControlName="firstName">
+            <div class="text-danger"
+            *ngIf="registerForm.get('firstName').hasError('required')
+            && registerForm.get('firstName').touched">
+                FirstName is required!
+            </div>
+        </div>
+        <div class="form-group">
+            <label>LastName: 
+            </label>
+            <input type="text" class="form-control"
+            formControlName="lastName">
+            <div class="text-danger"
+            *ngIf="registerForm.get('lastName').touched">
+               <p *ngIf="registerForm.get('lastName').hasError('required')">LastName is required!</p>
+               <p *ngIf="registerForm.get('lastName').hasError('minlength')">Min Length!...... 2</p>
+               <p *ngIf="registerForm.get('lastName').hasError('maxlength')">Max Length!...... 20</p>
+            </div>
+        </div>
+        <fieldset formGroupName="address">
+            <div class="form-group">
+                <label>City: 
+                </label>
+                <input type="text" class="form-control"
+                formControlName="city">
+                <div class="text-danger"
+                *ngIf="registerForm.get('address.city').touched">
+                   <p *ngIf="registerForm.get('address.city').hasError('required')">City is required!</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Zip: 
+                </label>
+                <input type="text" class="form-control"
+                formControlName="zip">
+                <div class="text-danger"
+                *ngIf="registerForm.get('address.zip').touched">
+                   <p *ngIf="registerForm.get('address.zip').hasError('required')">Zip Code is mandatory!</p>
+                   <p *ngIf="registerForm.get('address.zip').hasError('pattern')">Pattern should match - zipcode should be 5 digits!</p>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group">
+            <label>Email: 
+            </label>
+            <input type="text" class="form-control"
+            formControlName="emailAddr">
+            <div class="text-danger"
+            *ngIf="registerForm.get('emailAddr').touched">
+               <p *ngIf="registerForm.get('emailAddr').hasError('required')">Email is mandatory!</p>
+               <p *ngIf="registerForm.get('emailAddr').hasError('pattern')">Pattern should match - Email!</p>
+               <p *ngIf="registerForm.get('emailAddr').hasError('emailDomain')">Email must be from persistent.com!</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" 
+                [disabled]="registerForm.invalid" value="submit" />
+        </div>
+    </div>
+</form>

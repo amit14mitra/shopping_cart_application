@@ -1,0 +1,55 @@
+<h2>Signup Form!</h2>
+<form #signupform='ngForm' (ngSubmit)="postForm()" novalidate> 
+    <pre>{{signupform.value | json}}</pre>
+    <div class='container'>
+        <div class='form-group'>
+            <label for='inputName'>Enter Name</label>
+            <input type="text" class="form-control"
+            id='inputName' name="name"
+            #username='ngModel'
+            [(ngModel)]='user.name' 
+            required 
+            minlength="3"/>
+            <!-- <p *ngIf='username.invalid'>Name is mandatory!</p> -->
+            <p *ngIf='username.errors?.required'>Name is mandatory!</p>
+            <p *ngIf='username.errors?.minlength'>Name should be at least 3 letters long!</p>
+         </div>
+        <div class='form-group'>
+            <label for='inputContact'>Enter Contact Number</label>
+            <input type="text" class="form-control"
+            id='inputContact' name="contact" 
+            [(ngModel)]='user.phone'
+            #usercontact='ngModel' 
+            required
+            minlength="5" maxlength="10"/>
+            <p *ngIf='usercontact.errors?.required'>Contact is mandatory!</p>
+            <p *ngIf='usercontact.errors?.minlength'>Contact should be at least 5 digits long!</p>
+            <p *ngIf='usercontact.errors?.maxlength'>Contact should be at the max 10 digits long!</p>
+        </div>
+        <div class='form-group'>
+            <label for='inputAddress'>Enter Address</label>
+            <input type="text" class="form-control"
+            id='inputAddress' name="address"
+            [(ngModel)]='user.address'
+            #useraddress='ngModel' required/>           
+            <p *ngIf='useraddress.errors?.required'>Address is mandatory!</p>
+        </div>
+        <div class='form-group'>
+            <label for='inputEmail'>Enter Email</label>
+            <input type="email" class="form-control"
+            id='inputEmail' name="email" 
+            [(ngModel)]='user.email'
+            [email]=true
+            #useremail='ngModel' 
+            required/>   
+            <p *ngIf='useremail.errors?.required'>Email is mandatory!</p>
+            <p *ngIf='useremail.errors?.email'>Invalid Email Address!</p>
+            <pre>Valid ? {{signupform.controls.email?.valid}}</pre>  
+            <pre>Dirty ? {{signupform.controls.email?.dirty}}</pre>  
+            <pre>Touched ? {{signupform.controls.email?.touched}}</pre>  
+        </div>
+        <button 
+        [disabled]='signupform.invalid'
+        class='btn btn-primary'>Submit</button>        
+    </div>
+</form>
